@@ -25,6 +25,7 @@ public class GraphicsPanel extends JPanel implements KeyListener, ActionListener
     private int time;
     private Clip gojoClip, sukunaClip, bothClip;
     private boolean playGojoDomain, playSukunaDomain, playBothDomain;
+    private int curJump;
 
     public GraphicsPanel(){
         playerOne = new Character(20, 380, "assets/gojo.png", true);
@@ -56,6 +57,7 @@ public class GraphicsPanel extends JPanel implements KeyListener, ActionListener
         playGojoDomain = true;
         playSukunaDomain = true;
         playBothDomain = true;
+        curJump = 0;
         try{
             background = ImageIO.read(new File("assets/background.png"));
             backupBackground = ImageIO.read(new File("assets/background.png"));
@@ -138,10 +140,15 @@ public class GraphicsPanel extends JPanel implements KeyListener, ActionListener
                 playerOne.moveRight();
             }
             if (pressedKeys[87]) {
-                playerOne.moveUp();
+                if(curJump<3){
+                    playerOne.moveUp();
+                    //change to have initial velocity, downwards acceleration
+                }
+                //playerOne.jumpingSprite();
             }
             if (pressedKeys[83]) {
                 playerOne.moveDown();
+                //might be irrevelant, unless changing it to block instead
             }
         }
 
